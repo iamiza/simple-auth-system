@@ -5,12 +5,18 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const db = require('./models'); // Sequelize setup from models/index.js
+const authRoutes = require("./routes/authRoutes");
+const taskRoutes = require("./routes/taskRoutes");
 
 const app = express();
 
 app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
+
+//Routes
+app.use("/api/auth", authRoutes);
+app.use("/api", taskRoutes);
 
 // Optional test route
 app.get('/', (req, res) => {

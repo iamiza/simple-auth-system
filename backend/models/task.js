@@ -1,8 +1,8 @@
 const {DataTypes} = require ('sequelize');
-const sequalize = require('../config/db');
+const sequelize = require('../config/db');
 const User = require('./user');
 
-const Task = sequalize.define('Task',{
+const Task = sequelize.define('Task',{
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -20,3 +20,5 @@ const Task = sequalize.define('Task',{
 
 User.hasMany(Task,{foreignKey: 'userId',onDelete: 'CASCADE'});
 Task.belongsTo(User, {foreignKey: 'userId'});
+
+module.exports = Task;
