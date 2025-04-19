@@ -15,8 +15,8 @@ app.use(express.json());
 app.use(cookieParser());
 
 //Routes
-app.use("/api/auth", authRoutes);
-app.use("/api", taskRoutes);
+app.use(authRoutes);
+app.use(taskRoutes);
 
 // Optional test route
 app.get('/', (req, res) => {

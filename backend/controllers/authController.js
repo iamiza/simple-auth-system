@@ -33,13 +33,14 @@ const login = async (req,res) => {
         if(!user) return res.status(404).json({message : "User not found"});
 
         const valid = await bcrypt.compare(password, user.password);
-        if(!user) return res.status(404).json({message: "Incorrect password"});
+        if(!valid) return res.status(404).json({message: "Incorrect password"});
 
         const token = jwt.sign({id: user.id}, process.env.JWT_SECRET, {expiresIn: '1d'});
 
         res.cookie("token",token,{
             httpOnly: true,
-            maxAge: 24 * 60 * 60 * 1000,
+            secure: false,
+            sameSite: 'Lax'
         })
 
         res.status(200).json({message:"Login Successful",token});
@@ -49,5 +50,22 @@ const login = async (req,res) => {
 
     }
 }
+const logout = async (req, res) => {
+    try {
+        res.clearCookie('token', {
+            httpOnly: true,
+            secure: false, 
+            sameSite: 'lax'
 
-module.exports = {register, login};
+        });
+        console.log("User logged out");
+        res.status(200).json({ message: 'Logged out successfully' });
+    } catch (error) {
+        res.status(500).json({ message: 'Logout unsuccessful', error });
+    }
+};
+
+module.exports = { logout };
+
+
+module.exports = {register, login, logout};
