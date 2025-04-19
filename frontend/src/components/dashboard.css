@@ -1,0 +1,145 @@
+.task-dashboard {
+    min-height: 100vh;
+    padding: 1.5rem;
+    background: linear-gradient(to bottom right, #f5f3ff, #ffe4e6);
+  }
+  
+  .dashboard-container {
+    max-width: 64rem;
+    margin: 0 auto;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+ 
+  .dashboard-title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #6b21a8;
+    margin-bottom: 2rem;
+  }
+  
+  .empty-task-box {
+
+    border: 2px dashed #ddd6fe;
+    padding: 3rem;
+    border-radius: 0.75rem;
+    text-align: center;
+    margin: 3rem 0;
+  }
+  
+  .empty-task-text {
+    font-size: 1.25rem;
+    color: #a78bfa;
+  }
+  
+  .task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .task-item {
+    background: transparent;
+    transition: background 0.3s;
+    border-radius: 0.5rem;
+  }
+  
+  .task-item:hover {
+    background-color: #f3e8ff;
+  }
+  
+  .task-item-content {
+    display: flex;
+    align-items: start;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .task-icon {
+    height: 3rem;
+    width: 3rem;
+    background: linear-gradient(to right, #9333ea, #ec4899);
+    color: white;
+    font-weight: bold;
+    font-size: 1.25rem;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  .task-info {
+    flex: 1;
+  }
+  
+  .task-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1f2937;
+  }
+  
+  .task-desc {
+    margin-top: 0.25rem;
+    color: #4b5563;
+  }
+  
+  .delete-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .task-item:hover .delete-button {
+    opacity: 1;
+  }
+  
+  .task-separator {
+    border: none;
+    height: 1px;
+    background-color: #ede9fe;
+    margin-top: 0.5rem;
+  }
+  
+  .add-button-container {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .add-task-button {
+    background: linear-gradient(to right, #9333ea, #ec4899);
+    color: white;
+    font-size: 1.125rem;
+    font-weight: 500;
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .add-task-button:hover {
+    background: linear-gradient(to right, #7e22ce, #db2777);
+  }
+  
+  .logout{
+    text-align: right;
+    padding: 1.8rem;
+  }
+  .logout-button{
+    background: linear-gradient(to right, #9333ea, #ec4899);
+    color: white;
+    font-size: 1.125rem;
+    font-weight: 500;
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    text-align: left;
+  }

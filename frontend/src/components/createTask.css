@@ -1,0 +1,103 @@
+.create-task-container {
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #f5f3ff, #ffe4e6);
+  padding: 1.5rem;
+}
+
+.create-task-wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+
+.card {
+  border: 1px solid #e9d5ff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #6b21a8;
+}
+
+.card-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex;
+}
+
+label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #4b5563;
+  margin-bottom: 0.5rem;
+  text-align: left;
+  width: 100%;
+}
+
+.input-field,
+.textarea-field {
+  border: 1px solid #e9d5ff;
+  border-radius: 4px;
+  padding: 0.75rem;
+  font-size: 1rem;
+}
+
+.input-field:focus,
+.textarea-field:focus {
+  outline: none;
+  border-color: #a78bfa;
+  box-shadow: 0 0 0 2px rgba(167, 139, 250, 0.5);
+}
+
+.textarea-field {
+  min-height: 150px;
+  resize: vertical;
+}
+
+
+.card-footer {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 1.5rem;
+  border-top: 1px solid #f3e8ff;
+}
+
+.btn {
+  padding: 0.75rem 2rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.cancel-btn {
+  background: white;
+  color: #7e22ce;
+  border: 1px solid #d8b4fe;
+}
+
+.cancel-btn:hover {
+  background: #f3f4f6;
+}
+
+.submit-btn {
+  background: linear-gradient(to right, #9333ea, #ec4899);
+  color: white;
+  border: none;
+}
+
+.submit-btn:hover {
+  background: linear-gradient(to right, #7e22ce, #db2777);
+}
