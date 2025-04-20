@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
+const apiURL = process.env.REACT_APP_API_URL
 
 const WelcomePage = ()=> {
+  console.log("url",apiURL);
   return (
     <div className="container">
       <div className="card">

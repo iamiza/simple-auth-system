@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import './dashboard.css'
 import { useError } from '../context/ErrorContext';
+const apiURL = process.env.REACT_APP_API_URL
 
 const TaskList = () => {
     const { user, logout } = useAuth();
@@ -13,9 +14,10 @@ const TaskList = () => {
     const navigate = useNavigate();
     const { showError } = useError();
 
+
     useEffect(() => {
         if (user) {
-            axios.get('http://localhost:5000/tasks', {
+            axios.get(`${apiURL}/tasks`, {
                 withCredentials: true,
             })
                 .then(response => {
@@ -32,7 +34,7 @@ const TaskList = () => {
     }, [user]);
     const handleDelete = async (taskId) => {
         try {
-            await axios.delete(`http://localhost:5000/tasks/${taskId}`, {
+            await axios.delete(`${apiURL}/tasks/${taskId}`, {
                 withCredentials: true,
             });
             // remove task from local state

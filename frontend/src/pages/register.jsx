@@ -3,6 +3,9 @@ import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import {useError} from '../context/ErrorContext'
+const apiURL = process.env.REACT_APP_API_URL
+
+
 const Register = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -13,7 +16,7 @@ const Register = () => {
     const handleRegistration = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:5000/register', {username, email, password },{withCredentials:true});
+            await axios.post(`${apiURL}/register`, {username, email, password },{withCredentials:true});
             await login(); // Store token in httpOnly cookie
             navigate('/tasks');
         } catch (error) {

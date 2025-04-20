@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import './createTask.css'
 import {useError} from '../context/ErrorContext'
 
+const apiURL = process.env.REACT_APP_API_URL
+
 const CreateTask = () => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -12,7 +14,7 @@ const CreateTask = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:5000/tasks', { title, description }, {
+            await axios.post(`${apiURL}/tasks`, { title, description }, {
                 withCredentials: true,
             });
             navigate('/tasks');

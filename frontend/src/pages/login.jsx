@@ -3,34 +3,39 @@ import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import {useError} from '../context/ErrorContext'
+const apiURL = process.env.REACT_APP_API_URL
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const { login } = useAuth();
+    const { login, isAuthenticated } = useAuth(); // <- make sure isAuthenticated is exposed
     const navigate = useNavigate();
-    const { showError } = useError(); // Use the showError function from context
+    const { showError } = useError();
 
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:5000/login', { email, password },
-            {withCredentials:true});
-            login(); 
-            // Store token in httpOnly cookie
-            navigate('/tasks')
+            await axios.post(`${apiURL}/login`, { email, password }, {
+                withCredentials: true
+            });
+            login(); // updates context
         } catch (error) {
             if (error.response) {
-                console.log('Login error:', error.response.data.message);
-                showError(error.response.data.message);  // Show backend error message
+                showError(error.response.data.message);
             } else {
-                console.log('Unexpected error:', error);
                 showError('Something went wrong, please try again later.');
             }
             setEmail("");
             setPassword("");
         }
     };
+
+    // React to successful login
+    React.useEffect(() => {
+        if (isAuthenticated) {
+            navigate('/tasks');
+        }
+    }, [isAuthenticated, navigate]);
 
     return (
         <div className="container">
