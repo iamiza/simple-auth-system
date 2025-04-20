@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
-import { Link , useNavigate} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import './dashboard.css'
+import { useError } from '../context/ErrorContext';
 
 const TaskList = () => {
     const { user, logout } = useAuth();
     const [tasks, setTasks] = useState([]);
+    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
+    const { showError } = useError();
+
     useEffect(() => {
         if (user) {
             axios.get('http://localhost:5000/tasks', {
@@ -16,10 +20,14 @@ const TaskList = () => {
             })
                 .then(response => {
                     setTasks(response.data);
+                    setLoading(false);
                 })
                 .catch(error => {
                     console.error('Error fetching tasks:', error);
+                    setLoading(false);
                 });
+        } else {
+            setLoading(false); // stop loading if no user
         }
     }, [user]);
     const handleDelete = async (taskId) => {
@@ -30,7 +38,13 @@ const TaskList = () => {
             // remove task from local state
             setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
         } catch (error) {
-            console.error("Error deleting task:", error);
+            if (error.response) {
+                // If the error response exists, display the message sent from the backend
+                showError(error.response.data.message);  // Show backend error message
+            } else {
+                console.log('Unexpected error:', error);
+                showError('Something went wrong, please try again later.');
+            }
         }
     };
 
@@ -40,7 +54,13 @@ const TaskList = () => {
             navigate("/")
 
         } catch (error) {
-            console.error('Logout error:', error);
+            if (error.response) {
+                showError(error.response.data.message);  // Show backend error message
+            } else {
+                console.log('Unexpected error:', error);
+                showError('Something went wrong, please try again later.');
+            }
+            navigate("/")
         }
     }
 
@@ -50,14 +70,16 @@ const TaskList = () => {
 
             <div className="task-dashboard">
                 <div className='logout'>
-                    <button className="logout-button" onClick={()=> handleLogout()}>Logout</button>
+                    <button className="logout-button" onClick={() => handleLogout()}>Logout</button>
                 </div>
-            
+
 
                 <div className="dashboard-container">
                     <h1 className="dashboard-title">Task Dashboard</h1>
 
-                    {tasks.length === 0 ? (
+                    {loading ? (
+                        <p>Loading...</p>
+                    ) : tasks.length === 0 ? (
                         <div className="empty-task-box">
                             <p className="empty-task-text">Your task list is empty. Time to add something new!</p>
                         </div>
@@ -92,20 +114,11 @@ const TaskList = () => {
                                 Add New Task
                             </button>
                         </Link>
-                        {/* <div>
-                        {
-                            user ? (
-                                <>
 
-                                    <button className="add-task-button" onClick={logout}>Logout</button>
-                                </>
-                            ) : (<Link to="/"></Link>)
-                        }
-                    </div> */}
 
 
                     </div>
-                   
+
                 </div>
             </div>
 

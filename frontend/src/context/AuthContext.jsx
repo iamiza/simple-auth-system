@@ -3,7 +3,6 @@ import axios from 'axios';
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    //const [cookies, setCookie, removeCookie] = useCookies(['token']);
     const [user, setUser] = useState(null);
     useEffect(() => {
         axios.get('http://localhost:5000/verify', {
@@ -21,10 +20,11 @@ export const AuthProvider = ({ children }) => {
 
     const login = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/login', {
+            const response = await axios.get('http://localhost:5000/verify', {
                 withCredentials: true,
             });
             setUser(response.data);
+            return response.data;
         } catch (error) {
             console.error('Login verification failed:', error);
             setUser(null);
