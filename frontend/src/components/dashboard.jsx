@@ -41,7 +41,6 @@ const TaskList = () => {
             setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
         } catch (error) {
             if (error.response) {
-                // If the error response exists, display the message sent from the backend
                 showError(error.response.data.message);  // Show backend error message
             } else {
                 console.log('Unexpected error:', error);

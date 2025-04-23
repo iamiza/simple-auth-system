@@ -37,7 +37,6 @@ export const ErrorProvider = ({ children }) => {
                         top: '10px', 
                         left: '50%', 
                         transform: 'translateX(-50%)',
-                        zIndex: 1000
                     }}
                 >
                     {error} {/* Display the error message */}

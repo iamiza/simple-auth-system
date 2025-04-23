@@ -8,7 +8,7 @@ const apiURL = process.env.REACT_APP_API_URL
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const { login, isAuthenticated } = useAuth(); // <- make sure isAuthenticated is exposed
+    const { login, isAuthenticated } = useAuth(); 
     const navigate = useNavigate();
     const { showError } = useError();
 
