@@ -24,6 +24,7 @@ function App() {
 
                         <Route path="/" element={<WelcomePage />} />
                         <Route path="/register" element={<Register />}></Route>
+                        <Route path="/reload" element={<Login/>}></Route>
                     </Routes>
                 </ErrorProvider>
             </Router>

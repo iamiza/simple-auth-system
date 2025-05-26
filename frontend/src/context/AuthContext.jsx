@@ -32,6 +32,8 @@ export const AuthProvider = ({ children }) => {
         } catch (error) {
             console.error('Login verification failed:', error);
             setUser(null);
+            setIsAuthenticated(false);
+            return null;
         }
     };
     

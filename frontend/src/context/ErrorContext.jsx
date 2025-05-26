@@ -1,9 +1,7 @@
 import React, { createContext, useState, useContext } from 'react';
 
-// Create the ErrorContext
 const ErrorContext = createContext();
 
-// Create a custom hook to access the ErrorContext
 export const useError = () => {
     return useContext(ErrorContext);  // Allows child components to access showError
 };

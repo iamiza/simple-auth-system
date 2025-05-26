@@ -8,7 +8,7 @@ const apiURL = process.env.REACT_APP_API_URL
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const { login, isAuthenticated } = useAuth(); 
+    const { login } = useAuth(); 
     const navigate = useNavigate();
     const { showError } = useError();
 
@@ -18,7 +18,10 @@ const Login = () => {
             await axios.post(`${apiURL}/login`, { email, password }, {
                 withCredentials: true
             });
-            login(); // updates context
+            const user = await login(); // updates context
+            if(user){
+                navigate('/tasks');
+            }
         } catch (error) {
             if (error.response) {
                 showError(error.response.data.message);
@@ -30,12 +33,6 @@ const Login = () => {
         }
     };
 
-    // React to successful login
-    React.useEffect(() => {
-        if (isAuthenticated) {
-            navigate('/tasks');
-        }
-    }, [isAuthenticated, navigate]);
 
     return (
         <div className="container">
